@@ -2,6 +2,7 @@ package com.rockstr99.budget_tracker.controller;
 
 import com.rockstr99.budget_tracker.dao.SourceDao;
 import com.rockstr99.budget_tracker.entity.Source;
+import com.rockstr99.budget_tracker.framework.utils.GridHeaderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,8 @@ public class SourceMasterController {
     public String getAllSources(Model model)
     {
         model.addAttribute("sources", sourceDao.getAllSources());
+        System.out.println(GridHeaderUtil.getGridHeaderMap(new Source()));
+
         return "sourceJSPs/masterSourceDetails";
     }
 
