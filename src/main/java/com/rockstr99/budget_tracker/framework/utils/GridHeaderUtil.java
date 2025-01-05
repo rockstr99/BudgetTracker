@@ -5,13 +5,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @Component
 public class GridHeaderUtil {
 
-    public static HashMap<String, String> getGridHeaderMap(Object gridObj) {
+    public LinkedHashMap<String, String> getGridHeaderMap(Object gridObj) {
         Class<?> gridClass = gridObj.getClass();
-        HashMap<String, String> map = new HashMap<>();
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
         Arrays.stream(gridClass.getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(GridHeader.class))
                 .forEach(field -> {
@@ -19,4 +21,18 @@ public class GridHeaderUtil {
                 });
         return map;
     }
+
+    public String createGridHeader(LinkedHashMap<String, String> gridHeaderMap) {
+        StringBuffer grid = new StringBuffer();
+        gridHeaderMap.forEach((key, value) -> grid.append("<th>").append(value).append("</th>"));
+        return grid.toString();
+    }
+
+    public String createGridData(LinkedHashMap<String, String> gridHeaderMap, List<?> gridDataList)
+    {
+        gridHeaderMap.forEach((key, value) -> {
+
+        });
+    }
+
 }
